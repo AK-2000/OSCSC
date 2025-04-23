@@ -48,10 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Populate district dropdown
   function populateDistrictDropdown(data) {
-    const districtSet = new Set(data.map((row) => row.District));
+    const districtSet = new Set(
+      data
+        .map((row) => row.District.trim())
+        .filter((d) => d !== "") // 🔥 filter out empty strings
+    );
+  
     const dropdown = document.getElementById("districtDropdown");
   
-    // Convert Set to array, sort alphabetically
+    // Convert Set to array, capitalize and sort alphabetically
     const sortedDistricts = Array.from(districtSet)
       .map(d => capitalizeWords(d))
       .sort((a, b) => a.localeCompare(b));
@@ -63,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdown.appendChild(option);
     });
   }
+
   
   // Helper to capitalize only first letter of each word
   function capitalizeWords(str) {
