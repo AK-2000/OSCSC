@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const absentCount = filteredData.length - presentCount;
 
         const presentLink = document.createElement("a");
-        presentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encodeURIComponent(option)}&count=${presentCount}`;
+        presentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encodeURIComponent(option)}&type=present&count=${presentCount}`;
         presentLink.textContent = presentCount;
         presentLink.style.color = "blue";
         presentLink.style.cursor = "pointer";
@@ -187,36 +187,4 @@ document.addEventListener("DOMContentLoaded", function () {
         cell5.textContent = ((presentCount / filteredData.length) * 100).toFixed(2) + "%";
 
         const absentLink = document.createElement("a");
-        absentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encodeURIComponent(option)}&count=${absentCount}&showAbsent=true`;
-        absentLink.textContent = absentCount;
-        absentLink.style.color = "red";
-        absentLink.style.cursor = "pointer";
-        absentLink.addEventListener("mouseover", function () {
-          absentLink.style.textDecoration = "underline";
-        });
-        absentLink.addEventListener("mouseout", function () {
-          absentLink.style.textDecoration = "none";
-        });
-        cell6.appendChild(absentLink);
-
-        cell7.textContent = ((absentCount / filteredData.length) * 100).toFixed(2) + "%";
-
-        serialNumber++;
-      });
-    });
-  }
-
-  function getPresentCount(data, facility) {
-    return data.filter((row) => row[facility] === "1").length;
-  }
-
-  fetchCSVData();
-});
-
-if (document.getElementById("exportBtn")) {
-  document.getElementById("exportBtn").addEventListener("click", function () {
-    const table = document.getElementById("questionTable");
-    const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
-    XLSX.writeFile(wb, "Procurement_Center_Report.xlsx");
-  });
-}
+        absentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encode
