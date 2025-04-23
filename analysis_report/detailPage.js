@@ -34,7 +34,10 @@ function populateTable(entries) {
   });
 }
 
+document.querySelector("#breakdownTable thead tr th:nth-child(2)").textContent = params.facility;
+
 populateTable(filteredEntries);
+
 
 document.getElementById("pcCodeFilter").addEventListener("input", function () {
   const filterText = this.value.toLowerCase();
