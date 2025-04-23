@@ -24,7 +24,16 @@ if (params.type === "present") {
 
 // Update the present/absent count based on filtered data
 let count = entriesToDisplay.length;
-document.getElementById("presentCount").textContent = `📊 ${params.type.charAt(0).toUpperCase() + params.type.slice(1)}: ${count}`;
+const countElement = document.getElementById("presentCount");
+
+// Dynamically change the color based on the type (present/absent)
+if (params.type === "absent") {
+  countElement.style.color = "red";  // Make the absent count red
+  countElement.textContent = `📊 Absent: ${count}`;
+} else {
+  countElement.style.color = "green";  // Keep the present count green (or default)
+  countElement.textContent = `📊 Present: ${count}`;
+}
 
 function populateTable(entries) {
   const tbody = document.querySelector("#breakdownTable tbody");
@@ -42,6 +51,8 @@ function populateTable(entries) {
     // Change the color if we are showing absent data
     if (params.type === "absent") {
       facilityCell.style.color = "red"; // Red for absent data
+    } else {
+      facilityCell.style.color = "green"; // Green for present data (if desired)
     }
 
     tr.appendChild(pcCell);
