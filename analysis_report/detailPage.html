@@ -2,39 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Facility Details</title>
-  <link rel="stylesheet" href="detailPage.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSCSC Dashboard - Detail View</title>
   <link rel="icon" type="image/jpeg" href="../images/tab_icon.jpeg">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="detailPage.css" />
+  <style>
+    path:hover {
+      animation: blink 0.8s infinite;
+      cursor: pointer;
+    }
+    @keyframes blink {
+      0% { fill: #ffcc00; }
+      50% { fill: #ff9900; }
+      100% { fill: #ffcc00; }
+    }
+  </style>
 </head>
 <body>
-  <div class="details-card">
-    <div class="page-heading-wrapper">
-      <h1 class="page-heading">Facility Details</h1>
-    </div>
 
-    <div id="question" class="page-heading1 detail-item"></div>
-    <div id="facility" class="page-heading1 detail-item"></div>
-    <div id="presentCount" class="detail-item"></div>
-    <button onclick="downloadTable()">Download as Excel</button>
-    <button onclick="goBack()">← Go Back</button>
-    <div class="filter-container">
-      <label for="pcCodeFilter">Filter by PC Code: </label>
-      <input type="text" id="pcCodeFilter" placeholder="Enter PC Code to filter">
+  <!-- Navbar Section -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="../images/OSCSC.png" alt="DFPD Logo" class="logo" style="width: 500px !important; height: auto !important;" />
     </div>
+    <div class="navbar-right">
+      <div class="navbar-date">As on: 29-03-2025</div>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
 
+  <!-- Heading: Detail View -->
+  <div class="page-heading-wrapper">
+    <h1 class="page-heading">Detail View: Breakdown</h1>
+  </div>
+
+  <!-- Question and Facility -->
+  <div class="detail-info">
+    <p id="question" class="detail-text">🟢 Question: Loading...</p>
+    <p id="facility" class="detail-text">🏷️ Facility: Loading...</p>
+    <p id="presentCount" class="detail-text">📊 Present: 0</p>
+  </div>
+  
+  <!-- Filter Section -->
+  <div class="filter-container">
+    <div class="filter-item">
+      <label for="pcCodeFilter">PC Code Filter</label>
+      <input type="text" id="pcCodeFilter" placeholder="Search by PC Code" />
+    </div>
+  </div>
+    <!-- Button to download the table as an Excel file -->
+  <div class="button-container">
+    <button id="downloadBtn" onclick="downloadTable()">Download as Excel</button>
+  </div>
+
+  <!-- Go Back Button -->
+  <div class="button-container">
+    <button onclick="goBack()">Go Back</button>
+  </div>
+  <!-- Table for displaying the detailed breakdown -->
+  <div class="table-container">
     <table id="breakdownTable">
       <thead>
         <tr>
           <th>PC Code</th>
-          <th>Status</th>
+          <th>Facility</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <!-- Table rows will be populated dynamically using JavaScript -->
+      </tbody>
     </table>
   </div>
 
+
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="detailPage.js"></script>
+
 </body>
 </html>
