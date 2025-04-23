@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSC Dashboard</title>
+  <link rel="icon" type="image/jpeg" href="../images/tab_icon.jpeg">
+  <link rel="stylesheet" href="report.css" />
+  <style>
+    path:hover {
+      animation: blink 0.8s infinite;
+      cursor: pointer;
+    }
+    @keyframes blink {
+      0% { fill: #ffcc00; }
+      50% { fill: #ff9900; }
+      100% { fill: #ffcc00; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar Section -->
+  <div class="navbar">
+    <div class="navbar-left">
+        <img src="../images/DFPD_logo.png" alt="DFPD Logo" class="logo" />
+    </div>
+    <!--
+    <div class="navbar-title">
+        Odisha State Civil Supplies Corporation – Verification of PCs Dashboard
+    </div>
+    -->
+    <div class="navbar-left">
+      <img src="../images/OSCSC.png" alt="DFPD Logo" class="logo" />
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-date">As on: 29-03-2025</div>
+      <div class="navbar-link"><a href="#">Report ➡️</a></div>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+
+  <!-- Horizontal Navigation Strip -->
+  <div class="navbar-sections">
+    <a href="../index.html">Home</a>
+    <a href="../infrastructure/infrastructure.html">Infrastructure</a>
+    <a href="#">Analysis Report</a>
+    <a href="#">Personnel</a>
+    <a href="#">Equipment</a>
+    <a href="#">Record Management</a>
+  </div>
+
+  <!-- Dropdown Menu -->
+  <div class="dropdown-menu" id="dropdownMenu">
+    <a href="../index.html">Home</a>
+    <a href="../infrastructure/infrastructure.html">Infrastructure</a>
+    <a href="#">Analysis Report</a>
+    <a href="#">Personnel</a>
+    <a href="#">Equipment</a>
+    <a href="#">Record Management</a>
+  </div>
+  <!-- Heading: ANalysis Report-->
+  <div class="page-heading-wrapper">
+    <h1 class="page-heading">Analysis Report</h1>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-container">
+    <div class="filter-item">
+      <label for="districtDropdown">District</label>
+      <select id="districtDropdown">
+        <option value="">-- Select District --</option>
+      </select>
+    </div>
+    <div class="filter-item">
+      <label for="pcCount">Count of PCs</label>
+      <div id="pcCount" class="count-box">0</div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button id="exportBtn">Download as Excel</button>
+  </div>
+  <!-- Table for displaying the questions -->
+  <div class="table-container">
+    <table id="questionTable">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Question</th>
+          <th>Facility</th>
+          <th>Present</th>
+          <th>% Present</th>
+          <th>Absent</th>
+          <th>% Absent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be populated dynamically using JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="report.js"></script>
+  
+</body>
+</html>

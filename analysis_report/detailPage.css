@@ -1,0 +1,246 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  overflow: hidden;
+  font-weight:bold;
+}
+
+.details-card {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.details-card h2 {
+  color: #086966;
+  font-size: 26px;
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+
+.detail-item {
+  font-size: 20px;
+  color: #333;
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+#presentCount {
+  color: #4CAF50;
+}
+
+#absentCount {
+  color: #F44336;
+}
+
+.count-section {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.progress-container {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.progress-bar {
+  height: 30px;
+  border-radius: 12px;
+  background-color: #ddd;
+  position: relative;
+  flex-grow: 1;
+}
+
+#presentBar {
+  background-color: #4CAF50;
+}
+
+#absentBar {
+  background-color: #FF5733;
+}
+
+.percentage-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+button {
+  margin: 10px auto;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #086966;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+button:hover {
+  background-color: #ffcc00;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.filter-container {
+  margin: 20px 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-container label {
+  font-size: 18px;
+  color: #086966;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#pcCodeFilter {
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#pcCodeFilter:focus {
+  outline: none;
+  border-color: #086966;
+  box-shadow: 0 4px 12px rgba(8, 105, 102, 0.3);
+}
+
+#breakdownTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+#breakdownTable th,
+#breakdownTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#breakdownTable th {
+  background-color: #086966;
+  color: white;
+}
+
+#breakdownTable tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+.page-heading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 20px;
+  margin-top: 5px;
+  animation: fadeInSlide 0.8s ease-out;
+}
+.page-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #086966;
+  background-color: white;
+  padding: 10px 25px;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.100);
+  transition: all 0.3s ease;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.page-heading1 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: white;
+  padding: 10px 25px;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.100);
+  transition: all 0.3s ease;
+  background-clip: padding-box;
+  position: relative;
+}
+
+/* Fancy animated border on hover */
+.page-heading::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #086966, #0c837f);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page-heading:hover {
+  transform: scale(1.03);
+  color: white; /* <-- Add this */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.page-heading:hover::before {
+  opacity: 1;
+}
+
+#studentDetailsContainer {
+  position: fixed; /* Make it float over content */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90vh; /* Keep it within screen */
+  overflow-y: auto;
+  background-color: #fff; /* Or your card background */
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  z-index: 9999; /* Ensure it's on top */
+  width: 90%;
+  max-width: 600px;
+
+}

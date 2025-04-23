@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facility Details</title>
+  <link rel="stylesheet" href="detailPage.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="details-card">
+    <div class="page-heading-wrapper">
+      <h1 class="page-heading">Facility Details</h1>
+    </div>
+
+    <!-- Display selected info: Question, Facility -->
+    <div id="question" class="page-heading1 detail-item"></div>
+    <div id="facility" class="page-heading1 detail-item"></div>
+
+    <!-- Present and Absent counts stacked vertically -->
+    <div class="count-section">
+      <div id="presentCount" class="detail-item"></div>
+      <div id="absentCount" class="detail-item"></div>
+
+      <!-- Display percentages -->
+      <div id="presentPercentage" class="percentage-item"></div>
+      <div id="absentPercentage" class="percentage-item"></div>
+
+      <!-- Data Bar Representation -->
+      <div class="progress-container">
+        <div id="presentBar" class="progress-bar"><div class="percentage-text" id="presentText"></div></div>
+        <div id="absentBar" class="progress-bar"><div class="percentage-text" id="absentText"></div></div>
+      </div>
+    </div>
+    <button onclick="downloadTable()">Download as Excel</button>
+    <button onclick="goBack()">← Go Back</button>
+    <!-- Filter for PC Code -->
+    <div class="filter-container">
+      <label for="pcCodeFilter">Filter by PC Code: </label>
+      <input type="text" id="pcCodeFilter" placeholder="Enter PC Code to filter">
+    </div>
+
+    <!-- Table with dynamic content -->
+    <table id="breakdownTable">
+      <thead>
+        <tr>
+          <th>PC Code</th>
+          <th id="facilityStatusHeader">Facility Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be injected here -->
+      </tbody>
+    </table>
+
+    <!-- Buttons for downloading and going back -->
+  </div>
+
+  <script src="detailPage.js"></script>
+</body>
+</html>

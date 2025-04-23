@@ -1,0 +1,534 @@
+/* Reset some default margins/paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  
+}
+.logo {
+  width: 300px;
+  height: 300px;
+  object-fit: contain; /* makes sure the image scales without distortion */
+}
+.navbar-left:nth-of-type(2) .logo {
+  width: 520px;
+  height: auto;
+}
+
+.navbar-date {
+ font-weight: bold; 
+}
+
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+.navbar-sections a:hover {
+  background-color: yellow;
+  color: black;
+}
+.logo {
+  height: 50px;
+}
+
+.navbar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-date {
+  font-size: 0.9rem;
+}
+
+.navbar-link a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Hamburger button for mobile */
+.hamburger {
+  display: flex;
+  justify-content: center;  /* Center the lines horizontally */
+  align-items: center;  /* Center the lines vertically */
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding: 0;  /* Remove padding to ensure button is square */
+  width: 50px;  /* Set a fixed width */
+  height: 50px;  /* Set a fixed height to make it square */
+  border-radius: 5px; /* Rounded corners for the hamburger button */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition for background and color */
+}
+
+/* Hamburger lines */
+.hamburger div {
+  width: 30px;  /* Width of each line */
+  height: 4px;  /* Height of each line */
+  background-color: black;  /* Default color of the lines */
+  border-radius: 2px;  /* Slightly rounded edges for the lines */
+  transition: background-color 0.3s ease;  /* Smooth transition on hover */
+}
+
+/* Adjust margin to perfectly center lines */
+.hamburger div:nth-child(1) {
+  margin-bottom: 4px;  /* Adjust space between top line and middle */
+}
+
+.hamburger div:nth-child(2) {
+  margin-bottom: 4px;  /* Adjust space between middle line and bottom */
+}
+
+/* Hover effect on the hamburger */
+.hamburger:hover {
+  background-color: #086966;  /* Green background on hover */
+  color: white;
+}
+
+.hamburger:hover div {
+  background-color: white;  /* Turn lines white on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;  /* Initially hidden */
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8);  /* Transparent black background with slight opacity */
+  text-align: center;
+  padding: 10px 0;
+  width: 200px;  /* Set width of the dropdown */
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  border-radius: 10px;  /* Rounded corners */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);  /* Soft shadow for depth */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-10px);  /* Slight initial offset */
+}
+
+/* Show dropdown when active */
+.dropdown-menu.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* Dropdown links */
+.dropdown-menu a {
+  padding: 12px 20px;  /* Adjust padding for better spacing */
+  color: white;
+  text-decoration: none;
+  font-size: 16px;  /* Slightly larger font size for better readability */
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border */
+  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect on dropdown links */
+.dropdown-menu a:hover {
+  background-color: rgba(255, 204, 0, 0.8);  /* Semi-transparent yellow background */
+  color: black;
+  transform: scale(1.05);  /* Slight scaling effect for interactivity */
+}
+
+/* Focus effect when selecting an item */
+.dropdown-menu a:focus {
+  outline: none;
+  background-color: rgba(247, 194, 0, 0.8);  /* Slightly darker yellow when focused */
+  color: black;
+}
+
+/* Add a smooth border-radius to the last link */
+.dropdown-menu a:last-child {
+  border-bottom: none;  /* Remove bottom border for the last item */
+  border-radius: 0 0 10px 10px;  /* Rounded bottom corners */
+}
+
+/* Add a smooth transition for the entire dropdown */
+.dropdown-menu a:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);  /* Thin border for separation */
+}
+/* For larger screens, hide the hamburger */
+@media (max-width: 768px) {
+  .navbar-sections {
+    display: none; /* Hide horizontal navbar on smaller screens */
+  }
+
+  .hamburger {
+    display: block;  /* Show hamburger on mobile */
+  }
+
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .stat-box-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 80%;
+  }
+}
+
+
+/* Horizontal nav (desktop) */
+.navbar-sections {
+  display: flex;
+  justify-content: center;
+  background-color: #086966;
+  padding: 8px 0;
+  gap: 20px;
+}
+
+/* Navbar link styles */
+.navbar-sections a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 30px;  /* Increased padding for larger clickable area */
+  border-radius: 5px;  /* Optional: for rounded corners */
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background-color and padding */
+}
+
+/* Hover Effect */
+.navbar-sections a:hover {
+  background-color: #ffcc00;  /* Change background color on hover */
+  color: black;  /* Change text color on hover */
+  padding: 12px 40px;  /* Increase padding on hover to make the color fill more */
+  font-weight: bold;
+}
+
+
+/* Heading: Analysis Report */
+.page-heading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 20px;
+  animation: fadeInSlide 0.8s ease-out;
+}
+
+.page-heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #086966;
+  background-color: white;
+  padding: 10px 25px;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.100);
+  transition: all 0.3s ease;
+  background-clip: padding-box;
+  position: relative;
+}
+
+/* Fancy animated border on hover */
+.page-heading::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #086966, #0c837f);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page-heading:hover {
+  transform: scale(1.03);
+  color: white; /* <-- Add this */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.page-heading:hover::before {
+  opacity: 1;
+}
+
+/* Fade-in slide animation */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* ---------------------------------- */
+/*District Filter Element*/
+/* ---------------------------------- */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 2px solid #086966;
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.200);
+}
+
+.filter-item label {
+  font-weight: bold;
+  color: #086966;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#districtDropdown {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #086966;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.count-box {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #086966;
+  margin-top: 5px;
+}
+
+
+/*Table CSS*/
+.table-container {
+  margin: 20px;
+  overflow-x: auto;  /* Enables horizontal scrolling for smaller screens */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #086966;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Make table more responsive */
+@media (max-width: 768px) {
+  table {
+    font-size: 14px;
+  }
+}
+
+/* Add hover effect for all table cells */
+table td {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Apply hover effect on all cells */
+table td:hover {
+  background-color: #f0f0f0; /* Light gray color on hover */
+}
+
+/* Apply hover effect on the Question column cells */
+table td:nth-child(2):hover {
+  background-color: #f0f0f0; /* Light gray color on hover */
+}
+
+/* Handle the merged (rowspan) question cells */
+table td[rowspan] {
+  background-color: #f2f2f2; /* Light gray background for question cells */
+}
+
+/* Make sure the question cells show the same hover effect */
+table td[rowspan]:hover {
+  background-color: #f0f0f0; /* Light gray color on hover */
+}
+
+/* Table container styling for gap from walls */
+.table-container {
+  margin: 30px auto; /* Centers the table and adds margin on top and bottom */
+  padding: 20px; /* Adds padding inside the container */
+  max-width: 90%; /* Ensures the table takes up 90% of the screen width */
+  box-sizing: border-box; /* Ensures padding is included in the width calculation */
+  border-radius: 8px; /* Round corners for a smooth appearance */
+  background-color: #fff; /* White background for the table container */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Light shadow around the table */
+  overflow: hidden; /* Prevents any overflow content */
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Makes sure the borders between cells collapse */
+  font-family: 'Arial', sans-serif; /* Sets a clean, modern font */
+}
+
+/* Add some spacing between cells */
+table td, table th {
+  padding: 12px; /* Add padding for spacing within cells */
+  border: 1px solid #ddd; /* Light gray border for the cells */
+  text-align: center; /* Center-align the text */
+  font-size: 14px; /* Make text a little smaller for better readability */
+}
+
+/* Table header styling */
+table th {
+  background-color: #086966; /* Green background for the header */
+  color: white; /* White text color */
+  font-size: 16px; /* Slightly larger text for headers */
+  font-weight: bold; /* Make the header text bold */
+  text-transform: uppercase; /* Uppercase text for a more formal look */
+}
+
+/* Hover effect for entire row when hovering over any cell */
+table tr:hover {
+  background-color: #636161; /* Light gray for row hover effect */
+  cursor: pointer; /* Change cursor to pointer for better UX */
+}
+
+/* Styling for question cells */
+table td[rowspan] {
+  background-color: #f2f2f2; /* Light gray for question cells */
+  font-weight: bold; /* Bold text for question cells */
+  color: #333; /* Dark text color */
+}
+
+/* Styling for table rows */
+table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff; /* White for odd rows */
+}
+
+/* Styling for the Question column */
+table td:nth-child(2) {
+  background-color: #fafafa; /* Very light gray for question column */
+}
+
+/* Styling for the cells when hovered */
+table td[rowspan]:hover {
+  background-color: #4e4c4c; /* Apply same hover effect on rowspan cells */
+}
+
+/* Remove hover effect for headers */
+table th:hover {
+  background-color: #ffcc00; /* Slightly darker green */
+  color: black; 
+  cursor: default; /* Disable cursor change on hover over headers */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table td, table th {
+    font-size: 12px; /* Smaller text for smaller screens */
+    padding: 8px; /* Less padding for smaller screens */
+  }
+}
+
+
+/* Make table text bold and slightly larger */
+#questionTable {
+  font-size: 16px; /* You can bump this to 17px or 18px if you want it bigger */
+  font-weight: bold;
+}
+
+
+/*Button*/
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+#exportBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #086966;  /* Original button color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;  /* Smooth transition */
+}
+
+#exportBtn:hover {
+  background-color: #ffcc00; /* Slightly darker green */
+  color: black; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
+  transform: scale(1.05); /* Slight scaling effect */
+}
+
+#exportBtn:active {
+  transform: scale(1); /* Reset scale when clicked */
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); /* Smaller shadow on click */
+}
