@@ -13,7 +13,13 @@ document.getElementById("question").textContent = `🟢 Question: ${params.quest
 document.getElementById("facility").textContent = `🏷️ Facility: ${params.facility}`;
 
 const csvData = JSON.parse(localStorage.getItem("filteredData")) || [];
-const filteredEntries = csvData.filter(row => row[params.facility] === "1");
+// Filter the data based on the present or absent selection
+let filteredEntries = [];
+if (params.showAbsent) {
+  filteredEntries = csvData.filter(row => row[params.facility] === "0"); // Absence (0) filtering
+} else {
+  filteredEntries = csvData.filter(row => row[params.facility] === "1"); // Presence (1) filtering
+}
 
 let presentCount = filteredEntries.length;
 document.getElementById("presentCount").textContent = `📊 Present: ${presentCount}`;
@@ -22,7 +28,7 @@ function populateTable(entries, showAbsent) {
   const tbody = document.querySelector("#breakdownTable tbody");
   tbody.innerHTML = "";
   
-  // Select the appropriate color based on the showAbsent flag
+  // Set the font color dynamically based on whether we're showing present or absent data
   const color = showAbsent ? 'red' : 'green'; // Red for absent, green for present
 
   entries.forEach(row => {
@@ -42,9 +48,7 @@ function populateTable(entries, showAbsent) {
 
 document.querySelector("#breakdownTable thead tr th:nth-child(2)").textContent = params.facility;
 
-// Choose whether to show present or absent data
-const filteredRows = filteredEntries.filter(row => row["PC Code"]); // Adjust this as per your data
-populateTable(filteredRows, params.showAbsent);
+populateTable(filteredEntries, params.showAbsent);
 
 document.getElementById("pcCodeFilter").addEventListener("input", function () {
   const filterText = this.value.toLowerCase();
@@ -58,7 +62,7 @@ function downloadTable() {
   const table = document.getElementById("breakdownTable");
   const wb = XLSX.utils.table_to_book(table, { sheet: "Details" });
   const safeFacility = params.facility.replace(/[^\w\s]/gi, "").replace(/\s+/g, "_");
-  XLSX.writeFile(wb, `${showAbsent ? 'Absent' : 'Present'}Details_${safeFacility}.xlsx`);
+  XLSX.writeFile(wb, `${params.showAbsent ? 'Absent' : 'Present'}Details_${safeFacility}.xlsx`);
 }
 
 function goBack() {
