@@ -1,0 +1,686 @@
+/* Reset some default margins/paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+.logo {
+  width: 300px;
+  height: 300px;
+  object-fit: contain; /* makes sure the image scales without distortion */
+}
+.navbar-left:nth-of-type(2) .logo {
+  width: 520px;
+  height: auto;
+}
+
+.navbar-date {
+ font-weight: bold; 
+}
+
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+.navbar-sections a:hover {
+  background-color: yellow;
+  color: black;
+}
+.logo {
+  height: 50px;
+}
+
+.navbar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-date {
+  font-size: 0.9rem;
+}
+
+.navbar-link a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Hamburger button for mobile */
+.hamburger {
+  display: flex;
+  justify-content: center;  /* Center the lines horizontally */
+  align-items: center;  /* Center the lines vertically */
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding: 0;  /* Remove padding to ensure button is square */
+  width: 50px;  /* Set a fixed width */
+  height: 50px;  /* Set a fixed height to make it square */
+  border-radius: 5px; /* Rounded corners for the hamburger button */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition for background and color */
+}
+
+/* Hamburger lines */
+.hamburger div {
+  width: 30px;  /* Width of each line */
+  height: 4px;  /* Height of each line */
+  background-color: black;  /* Default color of the lines */
+  border-radius: 2px;  /* Slightly rounded edges for the lines */
+  transition: background-color 0.3s ease;  /* Smooth transition on hover */
+}
+
+/* Adjust margin to perfectly center lines */
+.hamburger div:nth-child(1) {
+  margin-bottom: 4px;  /* Adjust space between top line and middle */
+}
+
+.hamburger div:nth-child(2) {
+  margin-bottom: 4px;  /* Adjust space between middle line and bottom */
+}
+
+/* Hover effect on the hamburger */
+.hamburger:hover {
+  background-color: #086966;  /* Green background on hover */
+  color: white;
+}
+
+.hamburger:hover div {
+  background-color: white;  /* Turn lines white on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;  /* Initially hidden */
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8);  /* Transparent black background with slight opacity */
+  text-align: center;
+  padding: 10px 0;
+  width: 200px;  /* Set width of the dropdown */
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  border-radius: 10px;  /* Rounded corners */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);  /* Soft shadow for depth */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-10px);  /* Slight initial offset */
+}
+
+/* Show dropdown when active */
+.dropdown-menu.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* Dropdown links */
+.dropdown-menu a {
+  padding: 12px 20px;  /* Adjust padding for better spacing */
+  color: white;
+  text-decoration: none;
+  font-size: 16px;  /* Slightly larger font size for better readability */
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border */
+  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect on dropdown links */
+.dropdown-menu a:hover {
+  background-color: rgba(255, 204, 0, 0.8);  /* Semi-transparent yellow background */
+  color: black;
+  transform: scale(1.05);  /* Slight scaling effect for interactivity */
+}
+
+/* Focus effect when selecting an item */
+.dropdown-menu a:focus {
+  outline: none;
+  background-color: rgba(247, 194, 0, 0.8);  /* Slightly darker yellow when focused */
+  color: black;
+}
+
+/* Add a smooth border-radius to the last link */
+.dropdown-menu a:last-child {
+  border-bottom: none;  /* Remove bottom border for the last item */
+  border-radius: 0 0 10px 10px;  /* Rounded bottom corners */
+}
+
+/* Add a smooth transition for the entire dropdown */
+.dropdown-menu a:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);  /* Thin border for separation */
+}
+/* For larger screens, hide the hamburger */
+@media (max-width: 768px) {
+  .navbar-sections {
+    display: none; /* Hide horizontal navbar on smaller screens */
+  }
+
+  .hamburger {
+    display: block;  /* Show hamburger on mobile */
+  }
+
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .stat-box-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 80%;
+  }
+}
+
+
+/* Horizontal nav (desktop) */
+.navbar-sections {
+  display: flex;
+  justify-content: center;
+  background-color: #086966;
+  padding: 8px 0;
+  gap: 20px;
+}
+
+/* Navbar link styles */
+.navbar-sections a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 30px;  /* Increased padding for larger clickable area */
+  border-radius: 5px;  /* Optional: for rounded corners */
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background-color and padding */
+}
+
+/* Hover Effect */
+.navbar-sections a:hover {
+  background-color: #ffcc00;  /* Change background color on hover */
+  color: black;  /* Change text color on hover */
+  padding: 12px 40px;  /* Increase padding on hover to make the color fill more */
+}
+
+
+/* Stat boxes */
+.stat-box-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: #e8eaf6;
+}
+
+.stat-box {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px 30px;
+  text-align: center;
+  width: 160px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #086966;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+.stat-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #086966;
+}
+
+
+/* Odisha Section */
+.odisha-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.odisha-section h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.odisha-content {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+/* Map container */
+.map-container {
+  flex: 1;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+/* Mirror Effect with Color Change */
+svg path {
+  position: relative;
+  fill: rgb(1, 86, 76); /* Default color */
+  transition: transform 0.5s ease, fill 0.3s ease; /* Smooth transition for transform and color */
+}
+
+svg path::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  transform: scaleY(-1); /* Flip the region vertically to create the mirror effect */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease;
+}
+
+svg path:hover {
+  fill: rgb(244, 195, 0); /* Color change to yellow on hover */
+}
+
+svg path:hover::before {
+  opacity: 1; /* Make the mirrored part visible on hover */
+}
+
+/* Tooltip Styling */
+#district-info,
+#map-tooltip,
+#tooltip {
+  position: absolute;
+  display: none;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 1000;
+  max-width: 250px;
+}
+
+#district-info {
+  position: absolute;
+  background-color: rgba(255, 254, 254, 0.9); /* Increased opacity from 0.7 to 0.9 */
+  color: #000000; /* White text for contrast */
+  padding: 10px 15px;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  transition: opacity 0.2s ease; /* Smooth transition for opacity */
+  pointer-events: none; /* Prevent interaction with the tooltip */
+  opacity: 0;
+  visibility: hidden;
+}
+
+#district-info.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#district-info strong {
+  font-weight: bold;
+  font-size: 16px; /* Make district name stand out */
+}
+
+/* Table */
+.odisha-table {
+  flex: 1;
+  width: 50%;
+  max-height: 600px; /* Or use 100% if parent has fixed height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+#odisha-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+}
+
+#odisha-data-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #086966;
+  color: white;
+  z-index: 2;
+}
+
+#odisha-data-table th,
+#odisha-data-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#odisha-data-table th {
+  background-color: #086966;
+  color: white;
+}
+
+#odisha-data-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#odisha-data-table tr:hover {
+  background-color: #d2e4ff;
+  animation: tableBlink 1s infinite;
+}
+
+/* Optional hover animation */
+@keyframes tableBlink {
+  0% { background-color: #d2e4ff; }
+  50% { background-color: #a0c4ff; }
+  100% { background-color: #d2e4ff; }
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-sections {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .stat-box-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 80%;
+  }
+}
+
+/* Weekly Visits */
+.weekly-visits {
+  padding: 20px;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.weekly-visits h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Week Strip */
+.week-strip {
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+}
+
+.week-strip:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.week-strip h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #333;
+}
+
+.week-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #086966;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.week-buttons button:hover {
+  background-color: #0a7b77;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(8, 105, 102, 0.3);
+}
+
+/* Weekly Visits Content */
+.summary-content {
+  gap: 40px;
+  display: flex;
+  justify-content: center; /* Centers the chart horizontally */
+  align-items: center; /* Centers the chart vertically */
+  position: relative; /* Allows absolute positioning of Y-axis label */
+  height: 480px; /* Ensure there's enough space for the chart and label */
+  width: 100%; /* Ensure the chart container takes full width */
+}
+
+
+/* Y-axis label (vertical) */
+.y-axis-label {
+  position: absolute; /* Position relative to the chart container */
+  left: -30px; /* Adjust this value to move the label closer to the left border */
+  top: 50%; /* Vertically center the label */
+  transform: translateY(-50%) rotate(270deg); /* Rotate 90 degrees to make it vertical */
+  transform-origin: center; /* Ensure the rotation is centered */
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  z-index: 10; /* Ensure label is above the chart */
+  text-align: center;
+  white-space: nowrap; /* Prevent wrapping of text */
+}
+
+/* Bar Chart Styling */
+.bar-chart {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 440px; /* Same height as table */
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 40px;
+  text-align: center; /* Ensure content is centered */
+}
+
+.bar {
+  width: 100%;
+  background-color: gold;
+  border-radius: 5px 5px 0 0;
+  transition: height 0.3s ease-in-out;
+}
+
+.bar-group span {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.week-label-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Optional, adds some space between Week and the number */
+  margin-top: 12px; /* Add this line to increase space */
+}
+
+.week-label {
+  font-size: 16px; /* Increased the font size of 'Week' */
+  font-weight: bold; /* Make 'Week' text bold */
+  color: #555;
+  margin: 0; /* Remove any default margins */
+}
+
+.week-number {
+  font-size: 18px; /* Increase font size for the number */
+  font-weight: bold; /* Make number bold for visibility */
+  margin: 0; /* Remove any default margins */
+  line-height: 1; /* Ensure no extra spacing vertically */
+  display: inline-block; /* Ensure proper alignment with Week text */
+}
+
+/* Table Styling */
+.week-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Add Blinking Animation */
+@keyframes blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.bar:hover {
+  animation: blink 1s infinite;
+}
+.bar-value {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+.week-table tbody tr:hover {
+  animation: blink 1s infinite;
+  cursor: pointer;
+}
+
+@keyframes colorBlink {
+  0% {
+    background-color: #d4af37;
+    box-shadow: 0 0 5px #d4af37;
+  }
+  50% {
+    background-color: #ffd700;
+    box-shadow: 0 0 15px #ffec8b;
+  }
+  100% {
+    background-color: #d4af37;
+    box-shadow: 0 0 5px #d4af37;
+  }
+}
+
+.bar:hover {
+  animation: colorBlink 1.2s infinite ease-in-out;
+}
+
+
+.week-table {
+  flex: 1;
+  min-width: 300px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.week-table thead {
+  background-color: #086966;
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.week-table th,
+.week-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.week-table tbody tr:hover {
+  animation: rowGlow 1.2s infinite ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+
+@keyframes rowGlow {
+  0% {
+    background-color: #f9f2d7;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    background-color: #fff8e1;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    background-color: #f9f2d7;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+  }
+}
+
+
+.week-table tbody tr:hover {
+  animation: rowGlow 1.2s infinite ease-in-out;
+  cursor: pointer;
+}
