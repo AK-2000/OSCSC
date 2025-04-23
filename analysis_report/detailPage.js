@@ -3,8 +3,7 @@ function getQueryParams() {
   return {
     question: params.get("question"),
     facility: params.get("facility"),
-    district: params.get("district"),
-    showAbsent: params.get("showAbsent") === "true"
+    type: params.get("type") || "present" // Default to "present" if no type is passed
   };
 }
 
@@ -13,32 +12,30 @@ document.getElementById("question").textContent = `🟢 Question: ${params.quest
 document.getElementById("facility").textContent = `🏷️ Facility: ${params.facility}`;
 
 const csvData = JSON.parse(localStorage.getItem("filteredData")) || [];
-// Filter the data based on the present or absent selection
-let filteredEntries = [];
-if (params.showAbsent) {
-  filteredEntries = csvData.filter(row => row[params.facility] === "0"); // Absence (0) filtering
-} else {
-  filteredEntries = csvData.filter(row => row[params.facility] === "1"); // Presence (1) filtering
+const filteredEntries = csvData.filter(row => row[params.facility] !== ""); // Filter only rows where data exists for the facility
+
+// Based on the 'type' in the URL, we show either Present or Absent data
+let entriesToDisplay;
+if (params.type === "present") {
+  entriesToDisplay = filteredEntries.filter(row => row[params.facility] === "1");  // Show Present data
+} else if (params.type === "absent") {
+  entriesToDisplay = filteredEntries.filter(row => row[params.facility] === "0");  // Show Absent data
 }
 
-let presentCount = filteredEntries.length;
-document.getElementById("presentCount").textContent = `📊 Present: ${presentCount}`;
+// Update the present/absent count based on filtered data
+let count = entriesToDisplay.length;
+document.getElementById("presentCount").textContent = `📊 ${params.type.charAt(0).toUpperCase() + params.type.slice(1)}: ${count}`;
 
-function populateTable(entries, showAbsent) {
+function populateTable(entries) {
   const tbody = document.querySelector("#breakdownTable tbody");
   tbody.innerHTML = "";
-  
-  // Set the font color dynamically based on whether we're showing present or absent data
-  const color = showAbsent ? 'red' : 'green'; // Red for absent, green for present
-
   entries.forEach(row => {
     const tr = document.createElement("tr");
     const pcCell = document.createElement("td");
     pcCell.textContent = row["PC Code"] || "N/A";
 
     const facilityCell = document.createElement("td");
-    facilityCell.textContent = showAbsent ? "Absent" : "Present"; // Dynamic text
-    facilityCell.style.color = color; // Apply dynamic color
+    facilityCell.textContent = params.type.charAt(0).toUpperCase() + params.type.slice(1);
 
     tr.appendChild(pcCell);
     tr.appendChild(facilityCell);
@@ -46,23 +43,22 @@ function populateTable(entries, showAbsent) {
   });
 }
 
-document.querySelector("#breakdownTable thead tr th:nth-child(2)").textContent = params.facility;
-
-populateTable(filteredEntries, params.showAbsent);
+// Populate the table with filtered data (either present or absent)
+populateTable(entriesToDisplay);
 
 document.getElementById("pcCodeFilter").addEventListener("input", function () {
   const filterText = this.value.toLowerCase();
-  const filteredRows = filteredEntries.filter(row =>
+  const filteredRows = entriesToDisplay.filter(row =>
     row["PC Code"]?.toLowerCase().includes(filterText)
   );
-  populateTable(filteredRows, params.showAbsent);
+  populateTable(filteredRows);
 });
 
 function downloadTable() {
   const table = document.getElementById("breakdownTable");
-  const wb = XLSX.utils.table_to_book(table, { sheet: "Details" });
+  const wb = XLSX.utils.table_to_book(table, { sheet: `${params.type.charAt(0).toUpperCase() + params.type.slice(1)} Data` });
   const safeFacility = params.facility.replace(/[^\w\s]/gi, "").replace(/\s+/g, "_");
-  XLSX.writeFile(wb, `${params.showAbsent ? 'Absent' : 'Present'}Details_${safeFacility}.xlsx`);
+  XLSX.writeFile(wb, `${params.type.charAt(0).toUpperCase() + params.type.slice(1)}Details_${safeFacility}.xlsx`);
 }
 
 function goBack() {
