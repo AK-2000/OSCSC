@@ -46,24 +46,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Populate district dropdown
+  // Populate district dropdown with case normalization
   function populateDistrictDropdown(data) {
     const districtSet = new Set(
       data
-        .map((row) => row.District.trim())
-        .filter((d) => d !== "") // 🔥 filter out empty strings
+        .map((row) => row.District.trim().toLowerCase())  // Normalize case to lowercase
+        .filter((d) => d !== "") // Remove empty districts
     );
   
     const dropdown = document.getElementById("districtDropdown");
   
-    // Convert Set to array, capitalize and sort alphabetically
+    // Convert Set to array, capitalize for display, and sort alphabetically
     const sortedDistricts = Array.from(districtSet)
       .map(d => capitalizeWords(d))
       .sort((a, b) => a.localeCompare(b));
   
     sortedDistricts.forEach((district) => {
       const option = document.createElement("option");
-      option.value = district;
+      option.value = district.toLowerCase();  // Store value in lowercase for matching
       option.textContent = district;
       dropdown.appendChild(option);
     });
@@ -79,15 +79,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle the district selection and update the table
   document.getElementById("districtDropdown").addEventListener("change", function () {
-    const selectedDistrict = this.value;
-    const filteredData = csvData.filter((row) => row.District === selectedDistrict);
-
+    const selectedDistrict = this.value.toLowerCase(); // Normalize the selected district
+    const filteredData = csvData.filter((row) => row.District.toLowerCase() === selectedDistrict); // Normalize data district names too
+  
     // Display filtered data count
     document.getElementById("pcCount").textContent = filteredData.length;
-
+  
     // Save filtered data to localStorage for use on detailPage
     localStorage.setItem("filteredData", JSON.stringify(filteredData));
-
+  
     // Update the table with filtered data
     updateTable(filteredData);
   });
