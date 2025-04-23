@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OSC Dashboard</title>
+  <link rel="stylesheet" href="infrastructure.css" />
+  <link rel="icon" href="../images/tab_icon.jpeg" />
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+      <div class="navbar-left">
+          <img src="../images/DFPD_logo.png" alt="DFPD Logo" class="logo" />
+      </div>
+      <div class="navbar-left">
+        <img src="../images/OSCSC.png" alt="DFPD Logo" class="logo" />
+      </div>
+      <div class="navbar-right">
+        <div class="navbar-date">As on: 29-03-2025</div>
+        <div class="navbar-link"><a href="#">Report ➡️</a></div>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+      </div>
+    </div>
+  
+    <!-- Horizontal Navigation Strip -->
+    <div class="navbar-sections">
+      <a href="../index.html">Home</a>
+      <a href="#">Infrastructure</a>
+      <a href="../analysis_report/report.html">Analysis Report</a>
+      <a href="#">Personnel</a>
+      <a href="#">Equipment</a>
+      <a href="#">Record Management</a>
+    </div>
+  
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="../index.html">Home</a>
+      <a href="#">Infrastructure</a>
+      <a href="../analysis_report/report.html">Analysis Report</a>
+      <a href="#">Personnel</a>
+      <a href="#">Equipment</a>
+      <a href="#">Record Management</a>
+    </div>
+    <!-- Heading -->
+    <h1 class="page-heading">Infrastructure</h1>
+    <!-- Content -->
+    <div class="infra-section">
+      <h2>Milling Area</h2>
+    
+      <!-- Floor section  -->
+      <div class="infra-card floor-container">
+        <h3 class="floor-main-heading">Floor</h3>
+      
+        <div class="floor-subsection">
+          
+          <div class="chart-box">
+            <h4 class="chart-heading">Type of Floor</h4>
+            <div class="chart-container">
+              <canvas id="floorChart"></canvas>
+            </div>
+          </div>
+      
+          <div class="chart-box">
+            <h4 class="chart-heading">Condition of Floor</h4>
+            <div class="chart-container">
+              <canvas id="conditionChart"></canvas>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      <!-- Wall Section -->
+      <div class="infra-card floor-container">
+        <h3 class="floor-main-heading">Wall</h3>
+      
+        <div class="floor-subsection">
+          
+          <div class="chart-box">
+            <h4 class="chart-heading">Type of Wall</h4>
+            <div class="chart-container">
+              <canvas id="wallChart"></canvas>
+            </div>
+          </div>
+      
+          <div class="chart-box">
+            <h4 class="chart-heading">Condition of Wall</h4>
+            <div class="chart-container">
+              <canvas id="wallConditionChart"></canvas>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      
+
+      
+  
+    
+      <div class="infra-card">
+        <h3>🕳️ Cracks</h3>
+        <ul>
+          <li>Are there any cracks?</li>
+        </ul>
+      </div>
+    
+      <div class="infra-card">
+        <h3>🌬️ Ventilation</h3>
+        <ul>
+          <li>Provision for ventilation in milling area</li>
+          <li>Are ventilation facilities intact?</li>
+          <li>Do windows or ventilators have wired mesh to prevent birds/insects?</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="infra-section">
+      <h2>Storage Area</h2>
+    
+      <div class="infra-card">
+        <h3>🧱 Floor</h3>
+        <ul>
+          <li>Type of Floor</li>
+          <li>Condition of Floor</li>
+        </ul>
+      </div>
+    
+      <div class="infra-card">
+        <h3>🕳️ Cracks</h3>
+        <ul>
+          <li>Are there any cracks?</li>
+        </ul>
+      </div>
+    
+      <div class="infra-card">
+        <h3>🌬️ Ventilation</h3>
+        <ul>
+          <li>Are ventilation facilities intact?</li>
+          <li>Do windows or ventilators have wired mesh to prevent birds/insects?</li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    
+  <!-- Chart.js and JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="infrastructure.js"></script>
+</body>
+</html>
