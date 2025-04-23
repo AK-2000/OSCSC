@@ -50,14 +50,27 @@ document.addEventListener("DOMContentLoaded", function () {
   function populateDistrictDropdown(data) {
     const districtSet = new Set(data.map((row) => row.District));
     const dropdown = document.getElementById("districtDropdown");
-
-    districtSet.forEach((district) => {
+  
+    // Convert Set to array, sort alphabetically
+    const sortedDistricts = Array.from(districtSet)
+      .map(d => capitalizeWords(d))
+      .sort((a, b) => a.localeCompare(b));
+  
+    sortedDistricts.forEach((district) => {
       const option = document.createElement("option");
       option.value = district;
       option.textContent = district;
       dropdown.appendChild(option);
     });
   }
+  
+  // Helper to capitalize only first letter of each word
+  function capitalizeWords(str) {
+    return str
+      .toLowerCase()
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
+
 
   // Handle the district selection and update the table
   document.getElementById("districtDropdown").addEventListener("change", function () {
@@ -210,14 +223,3 @@ if (document.getElementById("exportBtn")) {
 }
 
 
-function toTitleCase(str) {
-  return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
-}
-
-// Example usage:
-districts.forEach(district => {
-  const option = document.createElement("option");
-  option.value = district;
-  option.text = toTitleCase(district); // This makes it like "Khorda"
-  districtFilter.appendChild(option);
-});
