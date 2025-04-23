@@ -71,7 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(/\b\w/g, char => char.toUpperCase());
   }
 
-
+  // Helper to capitalize only first letter of each word
+  function capitalizeWords(str) {
+    return str
+      .toLowerCase()
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
   // Handle the district selection and update the table
   document.getElementById("districtDropdown").addEventListener("change", function () {
     const selectedDistrict = this.value;
