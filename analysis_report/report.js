@@ -208,3 +208,16 @@ if (document.getElementById("exportBtn")) {
     XLSX.writeFile(wb, "Procurement_Center_Report.xlsx");
   });
 }
+
+
+function toTitleCase(str) {
+  return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+}
+
+// Example usage:
+districts.forEach(district => {
+  const option = document.createElement("option");
+  option.value = district;
+  option.text = toTitleCase(district); // This makes it like "Khorda"
+  districtFilter.appendChild(option);
+});
