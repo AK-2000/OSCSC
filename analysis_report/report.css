@@ -335,6 +335,9 @@ body {
   color: #086966;
   margin-top: 5px;
 }
+#districtFilter option {
+  text-transform: capitalize;
+}
 
 
 /*Table CSS*/
