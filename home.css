@@ -12,7 +12,7 @@ body {
   color: #333;
 }
 .logo {
-  width: 800px;
+  width: 300px;
   height: 300px;
   object-fit: contain; /* makes sure the image scales without distortion */
 }
