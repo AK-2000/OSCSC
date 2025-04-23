@@ -29,6 +29,8 @@ document.getElementById("presentCount").textContent = `📊 ${params.type.charAt
 function populateTable(entries) {
   const tbody = document.querySelector("#breakdownTable tbody");
   tbody.innerHTML = "";
+  
+  // Loop through the entries and create rows
   entries.forEach(row => {
     const tr = document.createElement("tr");
     const pcCell = document.createElement("td");
@@ -36,6 +38,11 @@ function populateTable(entries) {
 
     const facilityCell = document.createElement("td");
     facilityCell.textContent = params.type.charAt(0).toUpperCase() + params.type.slice(1);
+    
+    // Change the color if we are showing absent data
+    if (params.type === "absent") {
+      facilityCell.style.color = "red"; // Red for absent data
+    }
 
     tr.appendChild(pcCell);
     tr.appendChild(facilityCell);
