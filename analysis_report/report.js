@@ -50,52 +50,41 @@ document.addEventListener("DOMContentLoaded", function () {
   function populateDistrictDropdown(data) {
     const districtSet = new Set(
       data
-        .map((row) => row.District.trim().toLowerCase())  // Normalize case to lowercase
-        .filter((d) => d !== "") // Remove empty districts
+        .map((row) => row.District.trim().toLowerCase())
+        .filter((d) => d !== "")
     );
-  
+
     const dropdown = document.getElementById("districtDropdown");
-  
-    // Convert Set to array, capitalize for display, and sort alphabetically
+
     const sortedDistricts = Array.from(districtSet)
       .map(d => capitalizeWords(d))
       .sort((a, b) => a.localeCompare(b));
-  
+
     sortedDistricts.forEach((district) => {
       const option = document.createElement("option");
-      option.value = district.toLowerCase();  // Store value in lowercase for matching
+      option.value = district.toLowerCase();
       option.textContent = district;
       dropdown.appendChild(option);
     });
   }
 
-  
-  // Helper to capitalize only first letter of each word
   function capitalizeWords(str) {
     return str
       .toLowerCase()
       .replace(/\b\w/g, char => char.toUpperCase());
   }
 
-  // Handle the district selection and update the table
   document.getElementById("districtDropdown").addEventListener("change", function () {
-    const selectedDistrict = this.value.toLowerCase(); // Normalize the selected district
-    const filteredData = csvData.filter((row) => row.District.toLowerCase() === selectedDistrict); // Normalize data district names too
-  
-    // Display filtered data count
+    const selectedDistrict = this.value.toLowerCase();
+    const filteredData = csvData.filter((row) => row.District.toLowerCase() === selectedDistrict);
     document.getElementById("pcCount").textContent = filteredData.length;
-  
-    // Save filtered data to localStorage for use on detailPage
     localStorage.setItem("filteredData", JSON.stringify(filteredData));
-  
-    // Update the table with filtered data
     updateTable(filteredData);
   });
 
-  // Update table with filtered data
   function updateTable(filteredData) {
     const tableBody = document.getElementById("questionTable").getElementsByTagName("tbody")[0];
-    tableBody.innerHTML = ""; // Clear the existing table rows
+    tableBody.innerHTML = "";
 
     const questions = [
       {
@@ -160,12 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
       question.options.forEach((option, index) => {
         const row = tableBody.insertRow();
 
-        // Always insert Serial Number
         const cell1 = row.insertCell(0);
         cell1.textContent = serialNumber;
 
         if (index === 0) {
-          // Only insert the question cell on the first option row
           const cell2 = row.insertCell(1);
           cell2.textContent = question.question;
           cell2.rowSpan = question.options.length;
@@ -173,19 +160,17 @@ document.addEventListener("DOMContentLoaded", function () {
           cell2.style.backgroundColor = "#f2f2f2";
         }
 
-        // Insert remaining cells
-        const cell3 = row.insertCell(index === 0 ? 2 : 1); // Facility
-        const cell4 = row.insertCell(index === 0 ? 3 : 2); // Present
-        const cell5 = row.insertCell(index === 0 ? 4 : 3); // % Present
-        const cell6 = row.insertCell(index === 0 ? 5 : 4); // Absent
-        const cell7 = row.insertCell(index === 0 ? 6 : 5); // % Absent
+        const cell3 = row.insertCell(index === 0 ? 2 : 1);
+        const cell4 = row.insertCell(index === 0 ? 3 : 2);
+        const cell5 = row.insertCell(index === 0 ? 4 : 3);
+        const cell6 = row.insertCell(index === 0 ? 5 : 4);
+        const cell7 = row.insertCell(index === 0 ? 6 : 5);
 
         cell3.textContent = option;
 
         const presentCount = getPresentCount(filteredData, option);
         const absentCount = filteredData.length - presentCount;
 
-        // Create clickable link for the Present column
         const presentLink = document.createElement("a");
         presentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encodeURIComponent(option)}&count=${presentCount}`;
         presentLink.textContent = presentCount;
@@ -197,11 +182,23 @@ document.addEventListener("DOMContentLoaded", function () {
         presentLink.addEventListener("mouseout", function () {
           presentLink.style.textDecoration = "none";
         });
-
-        // Insert Present Link into the cell
         cell4.appendChild(presentLink);
+
         cell5.textContent = ((presentCount / filteredData.length) * 100).toFixed(2) + "%";
-        cell6.textContent = absentCount;
+
+        const absentLink = document.createElement("a");
+        absentLink.href = `detailPage.html?question=${encodeURIComponent(question.question)}&facility=${encodeURIComponent(option)}&count=${absentCount}&showAbsent=true`;
+        absentLink.textContent = absentCount;
+        absentLink.style.color = "red";
+        absentLink.style.cursor = "pointer";
+        absentLink.addEventListener("mouseover", function () {
+          absentLink.style.textDecoration = "underline";
+        });
+        absentLink.addEventListener("mouseout", function () {
+          absentLink.style.textDecoration = "none";
+        });
+        cell6.appendChild(absentLink);
+
         cell7.textContent = ((absentCount / filteredData.length) * 100).toFixed(2) + "%";
 
         serialNumber++;
@@ -209,16 +206,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Function to count how many "1" values are in the column corresponding to the facility
   function getPresentCount(data, facility) {
     return data.filter((row) => row[facility] === "1").length;
   }
 
-  // Initialize by fetching CSV data
   fetchCSVData();
 });
 
-// Export table to Excel
 if (document.getElementById("exportBtn")) {
   document.getElementById("exportBtn").addEventListener("click", function () {
     const table = document.getElementById("questionTable");
@@ -226,5 +220,3 @@ if (document.getElementById("exportBtn")) {
     XLSX.writeFile(wb, "Procurement_Center_Report.xlsx");
   });
 }
-
-
