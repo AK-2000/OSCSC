@@ -6,10 +6,13 @@ function getQueryParams() {
     type: params.get("type") || "present" // Default to "present" if no type is passed
   };
 }
-
+document.getElementById("statusHeader").textContent = params.facility;
 const params = getQueryParams();
 document.getElementById("question").textContent = `🟢 Question: ${params.question}`;
 document.getElementById("facility").textContent = `🏷️ Facility: ${params.facility}`;
+
+
+
 
 const csvData = JSON.parse(localStorage.getItem("filteredData")) || [];
 const filteredEntries = csvData.filter(row => row[params.facility] !== ""); // Filter only rows where data exists for the facility
