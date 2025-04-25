@@ -62,7 +62,6 @@ function displayQuestions(district, category) {
 }
 
 // Chart rendering function
-// Chart rendering function
 function renderChartsForSelection(district, category) {
   const questions = categoryToQuestions[category] || [];
   const chartsArea = document.getElementById("chartsArea");
@@ -74,6 +73,14 @@ function renderChartsForSelection(district, category) {
     );
 
     const optionCounts = {};
+    const allOptions = getAllOptionsForQuestion(question); // Helper function to get all possible options for this question
+    
+    // Initialize all options to 0 in optionCounts
+    allOptions.forEach(option => {
+      optionCounts[option] = 0;
+    });
+
+    // Count the occurrences of each option in the filtered data
     filtered.forEach(entry => {
       const option = entry["Option"];
       optionCounts[option] = (optionCounts[option] || 0) + 1;
@@ -193,7 +200,7 @@ function renderChartsForSelection(district, category) {
           },
           y: {
             min: 0,  // Set the minimum value for the y-axis
-            max: 1, // Set the maximum value to reduce the vertical space
+            max: 10, // Set the maximum value to reduce the vertical space
             ticks: {
               autoSkip: false,
               font: {
@@ -224,6 +231,50 @@ function renderChartsForSelection(district, category) {
     });
   });
 }
+
+// Helper function to get all possible options for each question
+function getAllOptionsForQuestion(question) {
+  const questionToOptions = {
+    "Type of floor available for unloading of Paddy?": [
+      "Cement Floor", 
+      "Brick/Paved Floor", 
+      "Kutcha Floor"
+    ],
+    "Is dunnage available at the unloading location?": [
+      "Dunnage Material"
+    ],
+    "Type of dunnage available at the unloading location?": [
+      "Tarpaulin", 
+      "Bamboo Mats", 
+      "Wooden/Plastic Crates", 
+      "Balli", 
+      "Others"
+    ],
+    "What is the source of power available at the center?": [
+      "Generator", 
+      "Electricity Connection/Grid energy", 
+      "Not Available", 
+      "On-site Solar Energy"
+    ],
+    "Is there a Procurement Center board/banner displayed prominently?": [
+      "PC Board"
+    ],
+    "Is there a waiting space for farmers at the purchase center?": [
+      "Waiting Space"
+    ],
+    "What kind of storage facility is available at procurement center for procured grains?": [
+      "CAP", 
+      "Open Storage with Dunnage", 
+      "Open Storage without Dunnage", 
+      "Shed without Dunnage", 
+      "Shed with Dunnage", 
+      "Not Available"
+    ]
+  };
+
+  return questionToOptions[question] || [];
+}
+
 
 
 // Load data from CSV and populate dropdowns
