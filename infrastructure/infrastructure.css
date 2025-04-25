@@ -1,357 +1,311 @@
 /* Reset some default margins/paddings */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body Styling */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-  }
-  .logo {
-    width: 300px;
-    height: 300px;
-    object-fit: contain; /* makes sure the image scales without distortion */
-  }
-  .navbar-left:nth-of-type(2) .logo {
-    width: 520px;
-    height: auto;
-  }
-  
-  .navbar-date {
-   font-weight: bold; 
-  }
-  
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    color: #000000;
-    padding: 10px 20px;
-    flex-wrap: wrap;
-  }
-  .navbar-sections a:hover {
-    background-color: yellow;
-    color: black;
-  }
-  .logo {
-    height: 50px;
-  }
-  
-  .navbar-title {
-    flex: 1;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .navbar-date {
-    font-size: 0.9rem;
-  }
-  
-  .navbar-link a {
-    color: #000000;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
-  /* Hamburger button for mobile */
-  .hamburger {
-    display: flex;
-    justify-content: center;  /* Center the lines horizontally */
-    align-items: center;  /* Center the lines vertically */
-    font-size: 2rem;
-    background: none;
-    border: none;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    padding: 0;  /* Remove padding to ensure button is square */
-    width: 50px;  /* Set a fixed width */
-    height: 50px;  /* Set a fixed height to make it square */
-    border-radius: 5px; /* Rounded corners for the hamburger button */
-    transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition for background and color */
-  }
-  
-  /* Hamburger lines */
-  .hamburger div {
-    width: 30px;  /* Width of each line */
-    height: 4px;  /* Height of each line */
-    background-color: black;  /* Default color of the lines */
-    border-radius: 2px;  /* Slightly rounded edges for the lines */
-    transition: background-color 0.3s ease;  /* Smooth transition on hover */
-  }
-  
-  /* Adjust margin to perfectly center lines */
-  .hamburger div:nth-child(1) {
-    margin-bottom: 4px;  /* Adjust space between top line and middle */
-  }
-  
-  .hamburger div:nth-child(2) {
-    margin-bottom: 4px;  /* Adjust space between middle line and bottom */
-  }
-  
-  /* Hover effect on the hamburger */
-  .hamburger:hover {
-    background-color: #086966;  /* Green background on hover */
-    color: white;
-  }
-  
-  .hamburger:hover div {
-    background-color: white;  /* Turn lines white on hover */
-  }
-  
-  /* Dropdown Menu */
-  .dropdown-menu {
-    display: none;  /* Initially hidden */
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.8);  /* Transparent black background with slight opacity */
-    text-align: center;
-    padding: 10px 0;
-    width: 200px;  /* Set width of the dropdown */
-    position: absolute;
-    right: 20px;
-    top: 60px;
-    border-radius: 10px;  /* Rounded corners */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);  /* Soft shadow for depth */
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    transform: translateY(-10px);  /* Slight initial offset */
-  }
-  
-  /* Show dropdown when active */
-  .dropdown-menu.active {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-    box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.9);
-  }
-  
-  /* Dropdown links */
-  .dropdown-menu a {
-    padding: 12px 20px;  /* Adjust padding for better spacing */
-    color: white;
-    text-decoration: none;
-    font-size: 16px;  /* Slightly larger font size for better readability */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border */
-    display: block;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  /* Hover effect on dropdown links */
-  .dropdown-menu a:hover {
-    background-color: rgba(255, 204, 0, 0.8);  /* Semi-transparent yellow background */
-    color: black;
-    transform: scale(1.05);  /* Slight scaling effect for interactivity */
-  }
-  
-  /* Focus effect when selecting an item */
-  .dropdown-menu a:focus {
-    outline: none;
-    background-color: rgba(247, 194, 0, 0.8);  /* Slightly darker yellow when focused */
-    color: black;
-  }
-  
-  /* Add a smooth border-radius to the last link */
-  .dropdown-menu a:last-child {
-    border-bottom: none;  /* Remove bottom border for the last item */
-    border-radius: 0 0 10px 10px;  /* Rounded bottom corners */
-  }
-  
-  /* Add a smooth transition for the entire dropdown */
-  .dropdown-menu a:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);  /* Thin border for separation */
-  }
-  /* For larger screens, hide the hamburger */
-  @media (max-width: 768px) {
-    .navbar-sections {
-      display: none; /* Hide horizontal navbar on smaller screens */
-    }
-  
-    .hamburger {
-      display: block;  /* Show hamburger on mobile */
-    }
-  
-    .navbar-title {
-      font-size: 1rem;
-    }
-  
-    .stat-box-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .stat-box {
-      width: 80%;
-    }
-  }
-  
-  
-  /* Horizontal nav (desktop) */
-  .navbar-sections {
-    display: flex;
-    justify-content: center;
-    background-color: #086966;
-    padding: 8px 0;
-    gap: 20px;
-  }
-  
-  /* Navbar link styles */
-  .navbar-sections a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 12px 30px;  /* Increased padding for larger clickable area */
-    border-radius: 5px;  /* Optional: for rounded corners */
-    transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background-color and padding */
-  }
-  
-  /* Hover Effect */
-  .navbar-sections a:hover {
-    background-color: #ffcc00;  /* Change background color on hover */
-    color: black;  /* Change text color on hover */
-    padding: 12px 40px;  /* Increase padding on hover to make the color fill more */
-  }
-
-/* Content */
-.page-heading {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/*Infrastructure Info*/
-.infra-section {
-  background: #f4f4f4;
-  padding: 25px 30px;
-  margin: 40px auto;
-  width: 90%;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.infra-section h2 {
-  color: #086966;
-  margin-bottom: 20px;
-  font-size: 1.6rem;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.infra-card {
-  background: #fff;
-  margin-bottom: 15px;
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.infra-card summary {
-  font-size: 1.1rem;
-  font-weight: 600;
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.navbar-sections a:hover {
+  background-color: yellow;
+  color: black;
+}
+
+.logo {
+  height: 50px;
+}
+
+.navbar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-date {
+  font-size: 0.9rem;
+}
+
+.navbar-link a {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Hamburger button for mobile */
+.hamburger {
+  display: flex;
+  justify-content: center;  /* Center the lines horizontally */
+  align-items: center;  /* Center the lines vertically */
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding: 0;  /* Remove padding to ensure button is square */
+  width: 50px;  /* Set a fixed width */
+  height: 50px;  /* Set a fixed height to make it square */
+  border-radius: 5px; /* Rounded corners for the hamburger button */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition for background and color */
+}
+
+/* Hamburger lines */
+.hamburger div {
+  width: 30px;  /* Width of each line */
+  height: 4px;  /* Height of each line */
+  background-color: black;  /* Default color of the lines */
+  border-radius: 2px;  /* Slightly rounded edges for the lines */
+  transition: background-color 0.3s ease;  /* Smooth transition on hover */
+}
+
+/* Adjust margin to perfectly center lines */
+.hamburger div:nth-child(1) {
+  margin-bottom: 4px;  /* Adjust space between top line and middle */
+}
+
+.hamburger div:nth-child(2) {
+  margin-bottom: 4px;  /* Adjust space between middle line and bottom */
+}
+
+/* Hover effect on the hamburger */
+.hamburger:hover {
+  background-color: #086966;  /* Green background on hover */
+  color: white;
+}
+
+.hamburger:hover div {
+  background-color: white;  /* Turn lines white on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;  /* Initially hidden */
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8);  /* Transparent black background with slight opacity */
+  text-align: center;
+  padding: 10px 0;
+  width: 200px;  /* Set width of the dropdown */
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  border-radius: 10px;  /* Rounded corners */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);  /* Soft shadow for depth */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-10px);  /* Slight initial offset */
+}
+
+/* Show dropdown when active */
+.dropdown-menu.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0px 8px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* Dropdown links */
+.dropdown-menu a {
+  padding: 12px 20px;  /* Adjust padding for better spacing */
+  color: white;
+  text-decoration: none;
+  font-size: 16px;  /* Slightly larger font size for better readability */
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border */
+  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect on dropdown links */
+.dropdown-menu a:hover {
+  background-color: rgba(255, 204, 0, 0.8);  /* Semi-transparent yellow background */
+  color: black;
+  transform: scale(1.05);  /* Slight scaling effect for interactivity */
+}
+
+/* Focus effect when selecting an item */
+.dropdown-menu a:focus {
+  outline: none;
+  background-color: rgba(247, 194, 0, 0.8);  /* Slightly darker yellow when focused */
+  color: black;
+}
+
+/* Add a smooth border-radius to the last link */
+.dropdown-menu a:last-child {
+  border-bottom: none;  /* Remove bottom border for the last item */
+  border-radius: 0 0 10px 10px;  /* Rounded bottom corners */
+}
+
+/* Add a smooth transition for the entire dropdown */
+.dropdown-menu a:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);  /* Thin border for separation */
+}
+
+/* Filters */
+.filters-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px auto;
+  flex-wrap: wrap;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  min-width: 220px;
+}
+
+.filter-box:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.filter-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #086966;
+}
+
+/* Styling for select dropdown */
+.filter-select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  position: relative;  /* Ensure proper positioning for dropdown */
+  z-index: 10; /* Make sure it opens on top of other elements */
+}
+
+/* Hover and Focus Effects */
+.filter-select:hover,
+.filter-select:focus {
+  border-color: #086966;
+  box-shadow: 0 0 5px rgba(8, 105, 102, 0.4);
   outline: none;
 }
 
-.infra-card ul {
-  margin-top: 10px;
-  padding-left: 20px;
-  color: #555;
+/* Additional fix for ensuring dropdown list appears downward */
+.filter-select::-webkit-dropdown-button {
+  /* Ensures dropdown button behavior remains consistent */
+  background-color: #f9f9f9;
+  border: none;
+  outline: none;
+  z-index: 10;
 }
 
-.infra-card li {
-  margin-bottom: 8px;
-}
-
-
-
-/*Type of floor in milling area*/
-.chart-container {
-  width: 350px;     /* Set the width of the chart */
-  height: 250px;    /* Set the height of the chart */
-  position: relative;
-  margin: 0 auto;   /* Center the chart horizontally */
-}
-
-.chart-container canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-canvas#floorChart {
-  width: 100% !important;   /* Make the chart fill the container's width */
-  height: 100% !important;  /* Make the chart fill the container's height */
-}
-
-.floor-charts-wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap; /* Makes it responsive */
-  margin-top: 20px;
-}
-
-.floor-chart {
-  flex: 1;
-  min-width: 280px; /* Ensures they stack vertically on small screens */
+/* Ensuring dropdown appears downward */
+.filter-select {
+  -webkit-appearance: none;  /* Removes default dropdown arrow in some browsers */
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 30px;  /* Adds padding for custom arrow */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"%3E%3Cpath fill="none" stroke="%23086A66" stroke-width="2" d="M1 1l5 5 5-5"%3E%3C/path%3E%3C/svg%3E'); /* Custom down arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
 
 
-.floor-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the whole Floor block */
+/* For larger screens, hide the hamburger */
+@media (max-width: 768px) {
+  .navbar-sections {
+    display: none; /* Hide horizontal navbar on smaller screens */
+  }
+
+  .hamburger {
+    display: block;  /* Show hamburger on mobile */
+  }
+
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .stat-box-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 80%;
+  }
 }
 
-/* Main Floor Heading */
-.floor-main-heading {
-  text-align: center;
-  font-size: 1.7rem;         /* Bigger font size */
-  font-weight: 700;        /* Bolder */
-  color: #086966;          /* Matching theme color */
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-}
-
-/* Subheadings for charts */
-.chart-heading {
-  font-size: 1.5rem;         /* Bigger font size */
-  font-weight: 700;        /* Bolder */
-  color: #444;
-  text-align: center;
-  letter-spacing: 1px;
-  margin-bottom: 0.8rem;
-}
-
-.floor-subsection {
+/* Horizontal nav (desktop) */
+.navbar-sections {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  width: 100%;
+  background-color: #086966;
+  padding: 8px 0;
+  gap: 20px;
 }
 
-.chart-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1 1 300px; /* Flexible width with a minimum */
+/* Navbar link styles */
+.navbar-sections a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 30px;  /* Increased padding for larger clickable area */
+  border-radius: 5px;  /* Optional: for rounded corners */
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transition for background-color and padding */
 }
+
+/* Hover Effect */
+.navbar-sections a:hover {
+  background-color: #ffcc00;  /* Change background color on hover */
+  color: black;  /* Change text color on hover */
+  padding: 12px 40px;  /* Increase padding on hover to make the color fill more */
+}
+
+/* Content */
+.page-heading {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2rem;
+}
+
+.filter-select {
+  max-height: 12em; /* 6 options * 2em each approx */
+  overflow-y: auto;
+}
+
+.filter-box {
+  position: relative;
+  z-index: 10;
+}
+
+
 
 
