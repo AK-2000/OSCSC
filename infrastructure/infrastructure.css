@@ -163,13 +163,7 @@ body {
 }
 
 /* Filters */
-.filters-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 30px auto;
-  flex-wrap: wrap;
-}
+
 
 .filter-box {
   display: flex;
@@ -188,11 +182,10 @@ body {
   transform: translateY(-2px);
 }
 
+/* Label for Filter */
 .filter-label {
   font-weight: bold;
-  margin-bottom: 8px;
-  font-size: 1rem;
-  color: #086966;
+  margin-bottom: 5px; /* Add some space between label and dropdown */
 }
 
 /* Styling for select dropdown */
@@ -294,16 +287,30 @@ body {
   font-size: 2rem;
 }
 
+
+/* Filters Container */
+.filters-container {
+  display: flex;
+  justify-content: center; /* Horizontally center the filter boxes */
+  align-items: center; /* Vertically center the filter boxes */
+  gap: 30px; /* Space between the filter boxes */
+  margin-top: 20px; /* Optional: add some space from the top */
+  margin: 30px auto;
+  flex-wrap: wrap;
+}
 .filter-select {
   max-height: 12em; /* 6 options * 2em each approx */
   overflow-y: auto;
 }
 
-.filter-box {
-  position: relative;
-  z-index: 10;
-}
 
+/* Individual Filter Box */
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* General Box Styling */
 .container, .chart-container, .question-list {
   width: 100%;
