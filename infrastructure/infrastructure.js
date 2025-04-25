@@ -1,7 +1,9 @@
+// Menu toggle for dropdown
 function toggleMenu() {
   document.getElementById("dropdownMenu").classList.toggle("active");
 }
 
+// Close dropdowns if clicked outside
 document.addEventListener("click", function (event) {
   const menu = document.getElementById("dropdownMenu");
   const hamburger = document.querySelector(".hamburger");
@@ -10,127 +12,106 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// Function to load CSV and create both floor and wall charts
-async function loadCSV() {
-  try {
-    const response = await fetch('./infrastructure.csv');
-    if (!response.ok) throw new Error("Failed to fetch CSV file");
-
-    const data = await response.text();
-    const rows = data.trim().split('\n');
-    const headers = rows[0].split(',');
-
-    const questionIndex = headers.indexOf('Question');
-    const optionsIndex = headers.indexOf('Options');
-    const countIndex = headers.indexOf('Count');
-
-    if (questionIndex === -1 || optionsIndex === -1 || countIndex === -1) {
-      console.error("Required columns missing in CSV.");
-      return;
-    }
-
-    const totalCount = 1337;
-
-    // ===== FLOOR SECTION =====
-    const floorTypeData = { labels: [], counts: [] };
-    const floorConditionData = { labels: [], counts: [] };
-
-    // ===== WALL SECTION =====
-    const wallTypeData = { labels: [], counts: [] };
-    const wallConditionData = { labels: [], counts: [] };
-
-    for (let i = 1; i < rows.length; i++) {
-      const row = rows[i].split(',');
-      const question = row[questionIndex];
-      const option = row[optionsIndex];
-      const count = parseInt(row[countIndex]);
-
-      // Floor filtering
-      if (question === 'Type of floor available in Milling Area?') {
-        floorTypeData.labels.push(option);
-        floorTypeData.counts.push(count);
-      } else if (question === 'Condition of floor in Milling Area?') {
-        floorConditionData.labels.push(option);
-        floorConditionData.counts.push(count);
-      }
-
-      // Wall filtering
-      else if (question === 'Type of wall in Milling Area') {
-        wallTypeData.labels.push(option);
-        wallTypeData.counts.push(count);
-      } else if (question === 'Condition of wall in Milling Area?') {
-        wallConditionData.labels.push(option);
-        wallConditionData.counts.push(count);
-      }
-    }
-
-    // ===== FLOOR CHARTS =====
-    createDoughnutChart('floorChart', 'Floor Type Proportion', floorTypeData, totalCount);
-    createDoughnutChart('conditionChart', 'Floor Condition Proportion', floorConditionData, totalCount);
-
-    // ===== WALL CHARTS =====
-    createDoughnutChart('wallChart', 'Wall Type Proportion', wallTypeData, totalCount);
-    createDoughnutChart('wallConditionChart', 'Wall Condition Proportion', wallConditionData, totalCount);
-
-  } catch (error) {
-    console.error("Error loading or parsing CSV:", error);
-  }
+// Utility function to format names
+function formatName(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
 
-// Reusable chart creation function
-function createDoughnutChart(canvasId, label, dataSet, totalCount) {
-  const ctx = document.getElementById(canvasId).getContext('2d');
-  const percentages = dataSet.counts.map(count => (count / totalCount) * 100);
+// Load data from CSV and populate dropdowns
+function loadInfrastructureData() {
+  Papa.parse("infrastructure.csv", {
+    header: true,
+    download: true,
+    complete: function (results) {
+      const data = results.data;
+      const districtSet = new Set();
+      const categorySet = new Set();
 
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: dataSet.labels,
-      datasets: [{
-        label,
-        data: percentages,
-        counts: dataSet.counts, // for tooltip
-        backgroundColor: [
-          '#086966',
-          'rgba(255, 204, 0, 0.8)',
-          'rgba(12, 22, 79, 0.8)',
-          'rgba(54, 14, 103, 0.8)',
-          'rgba(164, 107, 234, 0.8)'          
-        ],
-        borderColor: [
-          '#086966',
-          'rgba(255, 204, 0, 1)',
-          'rgba(12, 22, 79, 0.8)', 
-          'rgba(54, 14, 103, 0.8)',
-          'rgba(164, 107, 234, 0.8)'      
-        ],
-        borderWidth: 1,
-        cutout: '75%' // thinner doughnut
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          position: 'bottom'
-        },
-        tooltip: {
-          callbacks: {
-            title: function (tooltipItems) {
-              return tooltipItems[0].label;
-            },
-            label: function (context) {
-              const count = context.dataset.counts?.[context.dataIndex];
-              const percentage = context.raw.toFixed(2);
-              return `Count: ${count} (${percentage}%)`;
-            }
-          }
+      // Collect distinct districts and categories
+      data.forEach((row) => {
+        if (row["District"]) {
+          districtSet.add(formatName(row["District"].trim()));
         }
-      }
+        if (row["Category"]) {
+          categorySet.add(formatName(row["Category"].trim()));
+        }
+      });
+
+      // Sort and populate the districts dropdown
+      const sortedDistricts = Array.from(districtSet).sort();
+      const districtList = document.getElementById("districtList");
+
+      sortedDistricts.forEach((district) => {
+        const item = document.createElement("div");
+        item.classList.add("dropdown-item");
+        item.textContent = district;
+        item.onclick = () => {
+          document.getElementById("selectedDistrict").textContent = district;
+          districtList.style.display = "none";
+        };
+        districtList.appendChild(item);
+      });
+
+      // Sort and populate the categories dropdown
+      const sortedCategories = Array.from(categorySet).sort();
+      const categoryList = document.getElementById("categoryList");
+
+      sortedCategories.forEach((category) => {
+        const item = document.createElement("div");
+        item.classList.add("dropdown-item");
+        item.textContent = category;
+        item.onclick = () => {
+          document.getElementById("selectedCategory").textContent = category;
+          categoryList.style.display = "none";
+        };
+        categoryList.appendChild(item);
+      });
+    },
+    error: function (err) {
+      console.error("Error loading CSV:", err);
     }
   });
 }
 
-window.onload = loadCSV;
+// Function executed when window is loaded
+window.onload = function () {
+  loadInfrastructureData();
+
+  // District Dropdown Logic
+  const selectedDistrict = document.getElementById("selectedDistrict");
+  const districtList = document.getElementById("districtList");
+  const districtDropdown = document.getElementById("districtDropdown");
+
+  selectedDistrict.addEventListener("click", () => {
+    districtList.style.display = districtList.style.display === "block" ? "none" : "block";
+  });
+
+  // Category Dropdown Logic
+  const selectedCategory = document.getElementById("selectedCategory");
+  const categoryList = document.getElementById("categoryList");
+  const categoryDropdown = document.getElementById("categoryDropdown");
+
+  selectedCategory.addEventListener("click", () => {
+    categoryList.style.display = categoryList.style.display === "block" ? "none" : "block";
+  });
+
+  const categoryItems = categoryList.querySelectorAll(".dropdown-item");
+  categoryItems.forEach(item => {
+    item.addEventListener("click", () => {
+      selectedCategory.textContent = item.textContent;
+      categoryList.style.display = "none";
+    });
+  });
+
+  // Close dropdowns on outside click
+  window.addEventListener("click", function (e) {
+    if (!districtDropdown.contains(e.target)) {
+      districtList.style.display = "none";
+    }
+    if (!categoryDropdown.contains(e.target)) {
+      categoryList.style.display = "none";
+    }
+  });
+};
+
+
