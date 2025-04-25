@@ -436,3 +436,13 @@ body {
   margin-right: auto;
   padding: 0 20px;
 }
+
+.filter-box {
+  position: relative;
+  z-index: 1000; /* Higher than any surrounding elements */
+}
+
+.question-list {
+  position: relative;
+  z-index: 1;
+}
