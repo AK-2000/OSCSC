@@ -2,148 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OSCSC Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure Analysis</title>
   <link rel="stylesheet" href="infrastructure.css" />
   <link rel="icon" href="../images/tab_icon.jpeg" />
+  <style>
+    .custom-dropdown {
+      position: relative;
+      width: 220px;
+      font-size: 1rem;
+    }
+
+    .dropdown-selected {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .dropdown-list {
+      position: absolute;
+      top: 110%;
+      width: 100%;
+      max-height: 12em; /* 6 items x 2em */
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #ffffff;
+      z-index: 99;
+      display: none;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item {
+      padding: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: #e6f2f2;
+    }
+  </style>
 </head>
 <body>
+  <!-- Navbar Section -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="../images/OSCSC.png" alt="DFPD Logo" class="logo" />
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-date">As on: 29-03-2025</div>
+      <div class="navbar-link"><a href="#">Report ➡️</a></div>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
 
-    <!-- Navbar Section -->
-    <div class="navbar">
-      <div class="navbar-left">
-        <img src="../images/OSCSC.png" alt="DFPD Logo" class="logo" style="width: 500px !important; height: auto !important;" />
-      </div>
-      <div class="navbar-right">
-        <div class="navbar-date">As on: 29-03-2025</div>
-        <div class="navbar-link"><a href="#">Report ➡️</a></div>
-        <button class="hamburger" onclick="toggleMenu()">☰</button>
-      </div>
-    </div>
-  
-    <!-- Horizontal Navigation Strip -->
-    <div class="navbar-sections">
-      <a href="../index.html">Home</a>
-      <a href="#">Infrastructure</a>
-      <a href="../analysis_report/report.html">Analysis Report</a>
-      <a href="#">Personnel</a>
-      <a href="#">Equipment</a>
-      <a href="#">Record Management</a>
-    </div>
-  
-    <!-- Dropdown Menu -->
-    <div class="dropdown-menu" id="dropdownMenu">
-      <a href="../index.html">Home</a>
-      <a href="#">Infrastructure</a>
-      <a href="../analysis_report/report.html">Analysis Report</a>
-      <a href="#">Personnel</a>
-      <a href="#">Equipment</a>
-      <a href="#">Record Management</a>
-    </div>
-    <!-- Heading -->
-    <h1 class="page-heading">Infrastructure</h1>
-    <!-- Content -->
-    <div class="infra-section">
-      <h2>Milling Area</h2>
-    
-      <!-- Floor section  -->
-      <div class="infra-card floor-container">
-        <h3 class="floor-main-heading">Floor</h3>
-      
-        <div class="floor-subsection">
-          
-          <div class="chart-box">
-            <h4 class="chart-heading">Type of Floor</h4>
-            <div class="chart-container">
-              <canvas id="floorChart"></canvas>
-            </div>
-          </div>
-      
-          <div class="chart-box">
-            <h4 class="chart-heading">Condition of Floor</h4>
-            <div class="chart-container">
-              <canvas id="conditionChart"></canvas>
-            </div>
-          </div>
-      
-        </div>
-      </div>
-      <!-- Wall Section -->
-      <div class="infra-card floor-container">
-        <h3 class="floor-main-heading">Wall</h3>
-      
-        <div class="floor-subsection">
-          
-          <div class="chart-box">
-            <h4 class="chart-heading">Type of Wall</h4>
-            <div class="chart-container">
-              <canvas id="wallChart"></canvas>
-            </div>
-          </div>
-      
-          <div class="chart-box">
-            <h4 class="chart-heading">Condition of Wall</h4>
-            <div class="chart-container">
-              <canvas id="wallConditionChart"></canvas>
-            </div>
-          </div>
-      
-        </div>
-      </div>
-      
+  <!-- Horizontal Navigation Strip -->
+  <div class="navbar-sections">
+    <a href="../index.html">Home</a>
+    <a href="#">Infrastructure</a>
+    <a href="../analysis_report/report.html">Analysis Report</a>
+    <a href="#">Personnel</a>
+    <a href="#">Equipment</a>
+    <a href="#">Record Management</a>
+  </div>
 
-      
-  
-    
-      <div class="infra-card">
-        <h3>🕳️ Cracks</h3>
-        <ul>
-          <li>Are there any cracks?</li>
-        </ul>
-      </div>
-    
-      <div class="infra-card">
-        <h3>🌬️ Ventilation</h3>
-        <ul>
-          <li>Provision for ventilation in milling area</li>
-          <li>Are ventilation facilities intact?</li>
-          <li>Do windows or ventilators have wired mesh to prevent birds/insects?</li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="infra-section">
-      <h2>Storage Area</h2>
-    
-      <div class="infra-card">
-        <h3>🧱 Floor</h3>
-        <ul>
-          <li>Type of Floor</li>
-          <li>Condition of Floor</li>
-        </ul>
-      </div>
-    
-      <div class="infra-card">
-        <h3>🕳️ Cracks</h3>
-        <ul>
-          <li>Are there any cracks?</li>
-        </ul>
-      </div>
-    
-      <div class="infra-card">
-        <h3>🌬️ Ventilation</h3>
-        <ul>
-          <li>Are ventilation facilities intact?</li>
-          <li>Do windows or ventilators have wired mesh to prevent birds/insects?</li>
-        </ul>
+  <!-- Dropdown Menu -->
+  <div class="dropdown-menu" id="dropdownMenu">
+    <a href="../index.html">Home</a>
+    <a href="#">Infrastructure</a>
+    <a href="../analysis_report/report.html">Analysis Report</a>
+    <a href="#">Personnel</a>
+    <a href="#">Equipment</a>
+    <a href="#">Record Management</a>
+  </div>
+
+  <!-- Heading -->
+  <h1 class="page-heading">Infrastructure</h1>
+
+  <!-- Filters Section -->
+  <div class="filters-container">
+    <div class="filter-box">
+      <label class="filter-label" for="district">Select District</label>
+      <div class="custom-dropdown" id="districtDropdown">
+        <div class="dropdown-selected" id="selectedDistrict">-- Select District --</div>
+        <div class="dropdown-list" id="districtList"></div>
       </div>
     </div>
-    
-    
-    
-    
+
+    <div class="filter-box">
+      <label class="filter-label" for="category">Select Category</label>
+      <div class="custom-dropdown" id="categoryDropdown">
+        <div class="dropdown-selected" id="selectedCategory">-- Choose Category --</div>
+        <div class="dropdown-list" id="categoryList"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Chart.js and JS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
   <script src="infrastructure.js"></script>
 </body>
 </html>
