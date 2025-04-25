@@ -237,8 +237,6 @@ body {
   background-position: right 10px center;
 }
 
-
-
 /* For larger screens, hide the hamburger */
 @media (max-width: 768px) {
   .navbar-sections {
@@ -306,6 +304,128 @@ body {
   z-index: 10;
 }
 
+/* General Box Styling */
+.container, .chart-container, .question-list {
+  width: 100%;
+  max-width: 1000px; /* Prevent elements from stretching too much */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
 
+.chart-container, .question-list {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e6e6e6;
+}
 
+/* Question List Styling */
+.question-list {
+  background-color: #f0fdfc;
+  border: 1px solid #00c0a3;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.question-list:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Question List Heading */
+.question-list h3 {
+  color: #086966;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 2px solid #00c0a3;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.question-list h3:hover {
+  color: #00c0a3;
+}
+
+/* List Styling */
+.question-list ul {
+  padding-left: 1.5rem;
+}
+
+.question-list li {
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 25px;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.question-list li:hover {
+  background-color: #e1f7f6;
+  padding-left: 30px;
+}
+
+.question-list li::before {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  font-size: 1.2rem;
+  color: #00c0a3;
+  transition: transform 0.3s ease;
+}
+
+.question-list li:hover::before {
+  transform: translateX(5px);
+}
+
+/* Chart Container */
+.chart-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e6e6e6;
+  max-width: 1000px; /* Ensure the container doesn't stretch too much */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #086966;
+  text-align: left;
+  padding-left: 4px;
+  border-left: 4px solid #00c0a3;
+}
+
+/* Canvas Styling */
+.chart-container canvas {
+  height: 300px !important;
+  max-width: 100%;
+}
+
+/* Body and General Layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 0 15px;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
